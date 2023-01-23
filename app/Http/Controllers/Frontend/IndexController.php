@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
@@ -37,7 +38,7 @@ class IndexController extends Controller
 
         $cat_id = $product->category_id;
         $relatedProduct = Product::where('category_id',  $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
-        return view('user.product_details', compact(
+        return view('frontend.product.product_details', compact(
             'product',
             'multiImage',
             'product_color',
@@ -46,6 +47,65 @@ class IndexController extends Controller
 
         ));
     }
+
+    public function ProductTag($tag)
+    {
+        $products = Product::where('status', 1)->where('product_tags', $tag)->orderBy('id', 'DESC')->paginate(3);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        return view('frontend.tags.index', compact('products', 'categories'));
+    }
+
+
+
+    public function CategoryWiseProduct(Request $request, $cat_id, $slug)
+    {
+
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $brands = Brand::orderBy('brand_name_en', 'ASC')->get();
+
+        $sort = '';
+        if ($request->sort != null) {
+            $sort = $request->sort;
+        }
+        if ($categories == null) {
+            return view('frontend.error.404');
+        } else {
+            if ($sort == 'priceAsc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('selling_price', 'ASC')->paginate(12);
+            } else if ($sort == 'priceDesc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('selling_price', 'DESC')->paginate(12);
+            } else if ($sort == 'discAsc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('discount_price', 'ASC')->paginate(12);
+            } else if ($sort == 'discDesc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('discount_price', 'DESC')->paginate(12);
+            } else if ($sort == 'titleAsc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('product_name_en', 'ASC')->paginate(12);
+            } else if ($sort == 'titleDesc') {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('product_name_en', 'DESC')->paginate(12);
+            } else {
+                $products = Product::where(['status' => 1, 'category_id' => $cat_id])->paginate(12);
+            }
+        }
+
+        $category_id = $cat_id;
+        $category_slug = $slug;
+
+        return view('frontend.product.category', compact('brands', 'products', 'categories', 'category_id', 'category_slug'));
+    }
+
+
+
+
+
+
+    public function SubCatWiseProduct($subcat_id, $slug)
+    {
+        $products = Product::where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
+        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+    }
+
 
     public function ProductViewAjax($id)
     {

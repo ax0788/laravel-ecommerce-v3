@@ -92,7 +92,7 @@
          </div><!-- /.stock-container -->
 
          <div class="description-container m-t-20">
-          {{ $product->short_descp_en }}
+          {{ $product->short_descp}}
          </div><!-- /.description-container -->
 
          <div class="price-container info-container m-t-20">
@@ -134,7 +134,7 @@
            <div class="form-group">
             <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color">
              <option selected disabled>--Choose Color--</option>
-             @foreach ($product_color_en as $color)
+             @foreach ($product_color as $color)
               <option value="{{ $color }}">{{ ucwords($color) }}</option>
              @endforeach
             </select>
@@ -208,7 +208,7 @@
 
          <div id="description" class="tab-pane in active">
           <div class="product-tab">
-           <p class="text"> {{ strip_tags($product->long_descp_en) }}</p>
+           <p class="text"> {{ strip_tags($product->long_descp) }}</p>
           </div>
          </div><!-- /.tab-pane -->
 

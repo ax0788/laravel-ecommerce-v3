@@ -6,7 +6,7 @@
  <nav class="yamm megamenu-horizontal">
   <ul class="nav">
    @foreach ($categories as $category)
-    <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+    <li class="dropdown menu-item"> <a href="{{ route('product.category', ['cat_id' => $category->id, 'slug' => $category->category_slug_en]) }}" class="dropdown-toggle" data-toggle="dropdown"><i
        class="icon {{ $category->category_icon }}" aria-hidden="true"></i>
       {{ $category->category_name_en }}
      </a>
@@ -21,7 +21,7 @@
         @endphp
         @foreach ($subcategories as $subcategory)
          <div class="col-sm-12 col-md-3">
-          <a href="{{ url('subcategory/' . $subcategory->id . '/' . $subcategory->subcategory_slug_en) }}">
+            <a href="{{ url('/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
            <h2 class="title mt-5">
             {{ $subcategory->subcategory_name_en }}
            </h2>

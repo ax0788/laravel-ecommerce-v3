@@ -9,8 +9,8 @@
   <div class="sidebar-widget-body outer-top-xs">
    <div class="tag-list">
      @foreach ($tags_en as $tag)
-      <a class="item" title="Phone"
-       href="{{ url('product/tag/' . $tag->product_tags_en) }}">{{ str_replace(',', ' ', $tag->product_tags) }}</a>
+      <a class="item"
+       href="{{ url('product/tag/' . $tag->product_tags) }}">{{ str_replace(',', ' ', $tag->product_tags) }}</a>
      @endforeach
    </div>
    <!-- /.tag-list -->

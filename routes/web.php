@@ -178,6 +178,16 @@ Route::group(['middleware' => 'auth'], function () {
 ////////////// Guest Routes ///////////////////
 
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails'])->name('product.details');
+
+// Product Tags
+Route::get('/product/tag/{tag}', [IndexController::class, 'ProductTag']);
+
+// Frontend Category wise Data
+Route::get('/{cat_id}/{slug}', [IndexController::class, 'CategoryWiseProduct'])->name('product.category');
+
+// Frontend SubCategory wise Data
+Route::get('/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
 // Product View Modal with AJAX
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
 // Product Add to Cart Store DATA

@@ -1,6 +1,6 @@
 @extends('frontend.main_master')
 @section('title')
- Product Tag
+ Category Products
 @endsection
 @section('content')
  <div class="breadcrumb">
@@ -16,12 +16,14 @@
   <!-- /.container -->
  </div>
  <!-- /.breadcrumb -->
+
+
  <div class="body-content outer-top-xs">
   <div class='container'>
    <div class='row'>
     <div class='col-md-3 sidebar'>
      <!-- ================================== TOP NAVIGATION ================================== -->
-     @include('frontend.common.vertical_menu')
+     {{-- @include('frontend.common.vertical_menu') --}}
      <!-- /.side-menu -->
      <!-- ================================== TOP NAVIGATION : END ================================== -->
      <div class="sidebar-module-container">
@@ -37,41 +39,10 @@
 
           @foreach ($categories as $category)
            <div class="accordion-group">
-            <div class="accordion-heading"> <a href="#collapse{{ $category->id }}" data-toggle="collapse"
-              class="accordion-toggle collapsed">
-              @if (session()->get('language') == 'chinese')
-               {{ $category->category_name_cn }}
-              @else
-               {{ $category->category_name_en }}
-              @endif
-             </a> </div>
-            <!-- /.accordion-heading -->
-            <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
-             <div class="accordion-inner">
-              {{-- GET SubCategory Table Data --}}
-              @php
-               $subcategories = App\Models\SubCategory::where('category_id', $category->id)
-                   ->orderBy('subcategory_name_en', 'ASC')
-                   ->get();
-              @endphp
-
-              @foreach ($subcategories as $subcategory)
-               <ul>
-                <li><a href="#">
-                  @if (session()->get('language') == 'chinese')
-                   {{ $subcategory->subcategory_name_cn }}
-                  @else
-                   {{ $subcategory->subcategory_name_en }}
-                  @endif
-                 </a></li>
-
-               </ul>
-              @endforeach
-
-             </div>
-             <!-- /.accordion-inner -->
+            <div class="accordion-heading">
+             <input type="checkbox" name="" id=""> {{ $category->category_name_en }}
             </div>
-            <!-- /.accordion-body -->
+            <!-- /.accordion-heading -->
            </div>
            <!-- /.accordion-group -->
           @endforeach
@@ -95,66 +66,38 @@
           <input type="text" class="price-slider" value="">
          </div>
          <!-- /.price-range-holder -->
-         <a href="#" class="lnk btn btn-primary">Show Now</a>
         </div>
         <!-- /.sidebar-widget-body -->
        </div>
        <!-- /.sidebar-widget -->
        <!-- ============================================== PRICE SILDER : END ============================================== -->
+
+
        <!-- ============================================== MANUFACTURES============================================== -->
        <div class="sidebar-widget wow fadeInUp">
         <div class="widget-header">
-         <h4 class="widget-title">Manufactures</h4>
+         <h4 class="widget-title">Brands</h4>
         </div>
         <div class="sidebar-widget-body">
-         <ul class="list">
-          <li><a href="#">Forever 18</a></li>
-          <li><a href="#">Nike</a></li>
-          <li><a href="#">Dolce & Gabbana</a></li>
-          <li><a href="#">Alluare</a></li>
-          <li><a href="#">Chanel</a></li>
-          <li><a href="#">Other Brand</a></li>
-         </ul>
-         <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
+         <div class="accordion">
+
+          @foreach ($brands as $item)
+           <div class="accordion-group">
+            <div class="accordion-heading">
+             <input type="checkbox" name="" id=""> {{ $item->brand_name_en }}
+            </div>
+            <!-- /.accordion-heading -->
+           </div>
+           <!-- /.accordion-group -->
+          @endforeach
+         </div>
+         <!-- /.accordion -->
         </div>
         <!-- /.sidebar-widget-body -->
        </div>
        <!-- /.sidebar-widget -->
        <!-- ============================================== MANUFACTURES: END ============================================== -->
-       <!-- ============================================== COLOR============================================== -->
-       <div class="sidebar-widget wow fadeInUp">
-        <div class="widget-header">
-         <h4 class="widget-title">Colors</h4>
-        </div>
-        <div class="sidebar-widget-body">
-         <ul class="list">
-          <li><a href="#">Red</a></li>
-          <li><a href="#">Blue</a></li>
-          <li><a href="#">Yellow</a></li>
-          <li><a href="#">Pink</a></li>
-          <li><a href="#">Brown</a></li>
-          <li><a href="#">Teal</a></li>
-         </ul>
-        </div>
-        <!-- /.sidebar-widget-body -->
-       </div>
-       <!-- /.sidebar-widget -->
-       <!-- ============================================== COLOR: END ============================================== -->
-       <!-- ============================================== COMPARE============================================== -->
-       <div class="sidebar-widget wow fadeInUp outer-top-vs">
-        <h3 class="section-title">Compare products</h3>
-        <div class="sidebar-widget-body">
-         <div class="compare-report">
-          <p>You have no <span>item(s)</span> to compare</p>
-         </div>
-         <!-- /.compare-report -->
-        </div>
-        <!-- /.sidebar-widget-body -->
-       </div>
-       <!-- /.sidebar-widget -->
-       <!-- ============================================== COMPARE: END ============================================== -->
-       <!-- ============================================== PRODUCT TAGS ============================================== -->
-       @include('frontend.common.product_tags')
+
        <!-- /.sidebar-widget -->
       </div>
       <!-- /.sidebar-filter -->
@@ -162,25 +105,10 @@
      <!-- /.sidebar-module-container -->
     </div>
     <!-- /.sidebar -->
+
+
     <div class='col-md-9'>
      <!-- ========================================== SECTION – HERO ========================================= -->
-
-     <div id="category" class="category-carousel hidden-xs">
-      <div class="item">
-       <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt=""
-         class="img-responsive"> </div>
-       <div class="container-fluid">
-        <div class="caption vertical-top text-left">
-         <div class="big-text"> Big Sale </div>
-         <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-         <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
-        </div>
-        <!-- /.caption -->
-       </div>
-       <!-- /.container-fluid -->
-      </div>
-     </div>
-
 
      <div class="clearfix filters-container m-t-10">
       <div class="row">
@@ -197,17 +125,35 @@
        <!-- /.col -->
        <div class="col col-sm-12 col-md-6">
         <div class="col col-sm-3 col-md-6 no-padding">
-         <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+         <div class="lbl-cnt"> <span class="lbl">Sort by :</span>
           <div class="fld inline">
            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span
-              class="caret"></span> </button>
-            <ul role="menu" class="dropdown-menu">
-             <li role="presentation"><a href="#">position</a></li>
-             <li role="presentation"><a href="#">Price:Lowest first</a></li>
-             <li role="presentation"><a href="#">Price:HIghest first</a></li>
-             <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-            </ul>
+            <div class="form-group"
+             style="  position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: max-content;
+            right: 40px;
+            margin-right: 20px;">
+             <select class="form-control" id="sortBy" placeholder="Options">
+
+              <option selected disabled>Default</option>
+              <option value="priceAsc">Price:Lowest
+              </option>
+              <option value="priceDesc">Price:Highest
+              </option>
+              <option value="titleAsc">Alphabetical A
+               to Z</option>
+              <option value="titleDesc">Alphabetical Z
+               to A</option>
+              <option value="discAsc" >Discount - Lowest
+               to Highest</option>
+              <option value="discDesc">Discount -
+               Highest to Lowest</option>
+             </select>
+            </div>
+
            </div>
           </div>
           <!-- /.fld -->
@@ -215,29 +161,16 @@
          <!-- /.lbl-cnt -->
         </div>
         <!-- /.col -->
-        <div class="col col-sm-3 col-md-6 no-padding">
-         <div class="lbl-cnt"> <span class="lbl">Show</span>
-          <div class="fld inline">
-           <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu">
-             <li role="presentation"><a href="#">1</a></li>
-             <li role="presentation"><a href="#">2</a></li>
-             <li role="presentation"><a href="#">3</a></li>
-             <li role="presentation"><a href="#">4</a></li>
-             <li role="presentation"><a href="#">5</a></li>
-             <li role="presentation"><a href="#">6</a></li>
-             <li role="presentation"><a href="#">7</a></li>
-             <li role="presentation"><a href="#">8</a></li>
-             <li role="presentation"><a href="#">9</a></li>
-             <li role="presentation"><a href="#">10</a></li>
-            </ul>
-           </div>
-          </div>
-          <!-- /.fld -->
-         </div>
-         <!-- /.lbl-cnt -->
+        <div class="col col-sm-3 col-md-6">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group" style="    position: absolute;
+                top: -15%;
+                left: 80%;
+               ">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+              </form>
+
         </div>
         <!-- /.col -->
        </div>
@@ -284,12 +217,8 @@
               <!-- /.product-image -->
               <div class="product-info text-left">
                <h3 class="name"><a
-                 href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_cn) }}">
-                 @if (session()->get('language') == 'chinese')
-                  {{ $product->product_name_cn }}
-                 @else
-                  {{ $product->product_name_en }}
-                 @endif
+                 href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
+                 {{ $product->product_name_en }}
                 </a>
                </h3>
                <div class="rating rateit-small"></div>
@@ -341,8 +270,8 @@
 
        <!--            //////////////////// List View Start ////////////// -->
        <div class="tab-pane " id="list-container">
-        <div class="category-product">
-         @foreach ($products as $product)
+        <div class="category-product" id="product-data">
+         {{-- @foreach ($products as $product)
           <div class="category-product-inner wow fadeInUp">
            <div class="products">
             <div class="product-list product">
@@ -358,11 +287,7 @@
                <div class="product-info">
                 <h3 class="name"><a
                   href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
-                  @if (session()->get('language') == 'chinese')
-                   {{ $product->product_name_cn }}
-                  @else
                    {{ $product->product_name_en }}
-                  @endif
                  </a>
                 </h3>
                 <div class="rating rateit-small"></div>
@@ -377,11 +302,7 @@
 
                 <!-- /.product-price -->
                 <div class="description m-t-10">
-                 @if (session()->get('language') == 'chinese')
-                  {{ $product->short_descp_cn }}
-                 @else
                   {{ $product->short_descp_en }}
-                 @endif
                 </div>
                 <div class="cart clearfix animate-effect">
                  <div class="action">
@@ -431,7 +352,8 @@
            <!-- /.products -->
           </div>
           <!-- /.category-product-inner -->
-         @endforeach
+         @endforeach --}}
+         @include('frontend.product.single')
 
 
 
@@ -445,11 +367,15 @@
       </div>
       <!-- /.tab-content -->
       <div class="clearfix filters-container">
-       <div class="text-right">
+       <div class="text-center">
         <div class="pagination-container">
          <ul class="list-inline list-unstyled">
           {{ $products->links() }}
          </ul>
+         <div class="ajax-load text-center" style="display: none;">
+          <img src="{{ asset('frontend/assets/images/Loading_icon.gif') }}" alt="" style="height: 220px;">
+         </div>
+
          <!-- /.list-inline -->
         </div>
         <!-- /.pagination-container -->
@@ -466,61 +392,20 @@
     <!-- /.col -->
    </div>
    <!-- /.row -->
-
-   <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-   <div id="brands-carousel" class="logo-slider wow fadeInUp">
-    <div class="logo-slider-inner">
-     <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-      <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-
-      <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png"
-         src="assets/images/blank.gif" alt=""> </a> </div>
-      <!--/.item-->
-     </div>
-     <!-- /.owl-carousel #logo-slider -->
-    </div>
-    <!-- /.logo-slider-inner -->
-
-   </div>
-   <!-- /.logo-slider -->
    <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
   </div>
   <!-- /.container -->
 
  </div>
  <!-- /.body-content -->
+@endsection
+
+@section('scripts')
+ <script>
+  $('#sortBy').change(function() {
+   let sort = $('#sortBy').val();
+   window.location = "{{ url('' . $category_id . '') }}/{{ $category_slug }}?sort=" + sort;
+
+  })
+ </script>
 @endsection

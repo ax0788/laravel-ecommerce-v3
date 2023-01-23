@@ -740,10 +740,9 @@
   }
  </script>
 
+@yield('scripts')
 
  {{-- END COUPON REMOVE --}}
-
-
 </body>
 
 </html>
