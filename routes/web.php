@@ -216,3 +216,8 @@ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-cal', [CartController::class, 'CouponCal']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
+// Search Autocomplete Product Via Ajax
+Route::get('/searchajax', [IndexController::class, 'SearchAutoComplete'])->name('searchproductajax');
+Route::post('/searching', [IndexController::class, 'SearchResult'])->name('searchresult');

@@ -37,6 +37,9 @@
 
  {{-- Font Awesome v6 --}}
  <script src="https://kit.fontawesome.com/383363df1b.js" crossorigin="anonymous"></script>
+
+ {{-- JQUERYUI --}}
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 
 <body class="cnt-home">
@@ -69,6 +72,37 @@
  <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+{{-- Autocomplete --}}
+ <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ <script>
+    $(document).ready(function () {
+        src = "{{ route('searchproductajax') }}";
+
+        $( "#search_text" ).autocomplete({
+      source: function(request, response){
+       $.ajax({
+        url: src,
+        data: {
+            term: request.term
+        } ,
+        dataType: "JSON",
+        success: function (data){
+           response(data);
+        }
+       })
+
+      },
+      minLength: 1,
+    });
+
+    $(document).on('click', 'ui-menu-item', function () {
+        $('#search-form').submit();
+    })
+
+    });
+ </script>
+
 
  <script>
   @if (Session::has('message'))

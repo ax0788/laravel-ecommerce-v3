@@ -82,6 +82,16 @@ class IndexController extends Controller
                 $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('product_name_en', 'ASC')->paginate(12);
             } else if ($sort == 'titleDesc') {
                 $products = Product::where(['status' => 1, 'category_id' => $cat_id])->orderBy('product_name_en', 'DESC')->paginate(12);
+            } else if ($request->input('filtercategory')) {
+                $checked = $_GET['filtercategory'];
+                // 2nd method without showing the category id in url, FILTER with name only
+                // $subcategory_filter = Subcategory::whereIn('name', $checked)->get();
+                // $subcateid = [];
+                // foreach($subcategory_filter as $scid_list){
+                //     array_push($subcateid, $scid_list->id)
+                // }
+                // END filter with Name
+                $products = Product::whereIn('category_id', $checked)->where('status', 1)->paginate(12);
             } else {
                 $products = Product::where(['status' => 1, 'category_id' => $cat_id])->paginate(12);
             }
@@ -89,8 +99,8 @@ class IndexController extends Controller
 
         $category_id = $cat_id;
         $category_slug = $slug;
-
-        return view('frontend.product.category', compact('brands', 'products', 'categories', 'category_id', 'category_slug'));
+        $currenturl = url()->full();
+        return view('frontend.product.category', compact('brands', 'products', 'categories', 'category_id', 'category_slug', 'currenturl'));
     }
 
 
@@ -127,5 +137,45 @@ class IndexController extends Controller
         ));
     }
 
+    public function SearchAutoComplete(Request $request)
+    {
+        $query = $request->get('term', '');
+        $services = Product::where('product_name_en', 'LIKE', '%' . $query . '%')->where('status', 1)->get();
 
+        $data = [];
+        foreach ($services as $service) {
+            $data[] = [
+                'value' => $service->product_name_en,
+                'id' => $service->id,
+            ];
+        }
+        if (count($data)) {
+            return $data;
+        } else {
+            return ['value' => 'No Result Found', 'id' => ''];
+        }
+    }
+
+    public function SearchResult(Request $request)
+    {
+
+        $searchingdata = $request->input('search_product');
+        $products = Product::where('product_name_en', 'LIKE', '%' . $searchingdata . '%')->where('status', 1)->first();
+
+        if ($products) {
+            if (isset($_POST['searchbtn'])) {
+
+                // Brand filter page
+                // Collection/cate
+                // return redirect('collection/' . $products->subcategory->category->group->url . '/' . $products->subcategory->category->url . '/' . $products->subcategory->url);
+            } else {
+                // PRODUCT-details Page
+                // return redirect('collection/' . $products->subcategory->category->group->url . '/' . $products->subcategory->category->url . '/' . $products->subcategory->url . '/' . $products->url);
+            }
+            // Custom Url: create new route and page for it
+            // return redirect('search/' . $products->url);
+        } else {
+            return redirect('/')->with('status', 'Product Not Available.');
+        }
+    }
 }

@@ -31,16 +31,20 @@
        <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
        <div class="sidebar-widget wow fadeInUp">
         <h3 class="section-title">shop by</h3>
+
+        <form action="{{ $currenturl}}" method="GET">
         <div class="widget-header">
-         <h4 class="widget-title">Category</h4>
+         <h4 class="widget-title">Brands
+            <button type="submit" class="btn btb-primary btn-sm">Filter</button>
+         </h4>
         </div>
         <div class="sidebar-widget-body">
          <div class="accordion">
 
-          @foreach ($categories as $category)
+          @foreach ($brands as $brand)
            <div class="accordion-group">
             <div class="accordion-heading">
-             <input type="checkbox" name="" id=""> {{ $category->category_name_en }}
+             <input type="checkbox" name="filterbrand" value="{{ $category_id }}"> {{ $brand->brand_name_en }}
             </div>
             <!-- /.accordion-heading -->
            </div>
@@ -49,6 +53,44 @@
          </div>
          <!-- /.accordion -->
         </div>
+    </form>
+
+
+
+    <form action="{{ $currenturl}}" method="GET">
+        <div class="widget-header">
+         <h4 class="widget-title">Category
+            <button type="submit" class="btn btb-primary btn-sm">Filter</button>
+         </h4>
+        </div>
+        <div class="sidebar-widget-body">
+         <div class="accordion">
+
+          @foreach ($categories as $category)
+          @php
+          $checked = [];
+          if(isset($_GET['filtercategory']))
+          {
+            $checked = $_GET['filtercategory'];
+          }
+          @endphp
+
+           <div class="accordion-group">
+            <div class="accordion-heading">
+             <input type="checkbox" name="filtercategory[]" value="{{ $category->id }}"
+             @if (in_array($category->id, $checked))
+             checked
+             @endif
+             > {{ $category->category_name_en }}
+            </div>
+            <!-- /.accordion-heading -->
+           </div>
+           <!-- /.accordion-group -->
+          @endforeach
+         </div>
+         <!-- /.accordion -->
+        </div>
+        </form>
         <!-- /.sidebar-widget-body -->
        </div>
        <!-- /.sidebar-widget -->
