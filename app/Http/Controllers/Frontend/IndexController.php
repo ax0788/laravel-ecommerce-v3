@@ -7,12 +7,14 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function index(){
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
         $products = Product::where('status', 1)->orderBy('id', 'DESC')->get();
 
         $featured = Product::where('featured', 1)->limit(6)->orderBy('id', 'DESC')->get();
@@ -160,17 +162,15 @@ class IndexController extends Controller
     {
 
         $searchingdata = $request->input('search_product');
-        $products = Product::where('product_name_en', 'LIKE', '%' . $searchingdata . '%')->where('status', 1)->first();
+        $product = Product::where('product_name_en', 'LIKE', '%' . $searchingdata . '%')->where('status', 1)->first();
 
-        if ($products) {
+        if ($product) {
             if (isset($_POST['searchbtn'])) {
 
-                // Brand filter page
-                // Collection/cate
-                // return redirect('collection/' . $products->subcategory->category->group->url . '/' . $products->subcategory->category->url . '/' . $products->subcategory->url);
+                return redirect(url('product/details/' . $product->id . '/' . $product->product_slug_en));
+
             } else {
-                // PRODUCT-details Page
-                // return redirect('collection/' . $products->subcategory->category->group->url . '/' . $products->subcategory->category->url . '/' . $products->subcategory->url . '/' . $products->url);
+                return redirect(url('product/details/' . $product->id . '/' . $product->product_slug_en));
             }
             // Custom Url: create new route and page for it
             // return redirect('search/' . $products->url);

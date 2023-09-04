@@ -10,7 +10,7 @@
     <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
      <!-- ================================== TOP NAVIGATION ================================== -->
-     @include('frontend.common.vertical_menu')
+     {{-- @include('frontend.common.vertical_menu') --}}
      <!-- /.side-menu -->
      <!-- ================================== TOP NAVIGATION : END ================================== -->
 
@@ -88,7 +88,7 @@
     <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">
      <!-- ========================================== SECTION – HERO ========================================= -->
 
-    {{--  <div id="hero">
+     {{--  <div id="hero">
       <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
 
 
@@ -245,9 +245,9 @@
                 <ul class="list-unstyled">
                  <li class="add-cart-button btn-group">
 
-                    <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal"
-                    data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
-                     class="fa fa-shopping-cart"></i> </button>
+                  <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal"
+                   data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
+                    class="fa fa-shopping-cart"></i> </button>
                  </li>
                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html"
                    title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
@@ -332,9 +332,9 @@
                 <div class="action">
                  <ul class="list-unstyled">
                   <li class="add-cart-button btn-group">
-                     <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal"
-                     data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
-                      class="fa fa-shopping-cart"></i> </button>
+                   <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal"
+                    data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
+                     class="fa fa-shopping-cart"></i> </button>
                   </li>
                   <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html"
                     title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
@@ -452,7 +452,7 @@
                 data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
                  class="fa fa-shopping-cart"></i> </button>
 
-{{--                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+               {{--                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
  --}}
               </li>
               {{-- Wishlist --}}
@@ -488,7 +488,7 @@
 
 
      <!-- ====== SKIP PRODUCT 0 ===== -->
-    {{--  <section class="section featured-product wow fadeInUp">
+     {{--  <section class="section featured-product wow fadeInUp">
       <h3 class="section-title">{{ $skip_category_0->category_name_en }}</h3>
       <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
        @foreach ($skip_product_0 as $product)
@@ -565,7 +565,7 @@
 
 
      <!-- ====== SKIP PRODUCT 1 ===== -->
- {{--     <section class="section featured-product wow fadeInUp">
+     {{--     <section class="section featured-product wow fadeInUp">
       <h3 class="section-title">{{ $skip_category_1->category_name_en }}</h3>
       <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
        @foreach ($skip_product_1 as $product)
@@ -756,303 +756,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-     <!-- ============================================== BEST SELLER ============================================== -->
-
-     <div class="best-deal wow fadeInUp outer-bottom-xs">
-      <h3 class="section-title">Best seller</h3>
-      <div class="sidebar-widget-body outer-top-xs">
-       <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
-        <div class="item">
-         <div class="products best-product">
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p20.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p21.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-         </div>
-        </div>
-        <div class="item">
-         <div class="products best-product">
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p22.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p23.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-         </div>
-        </div>
-        <div class="item">
-         <div class="products best-product">
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p24.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p25.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-         </div>
-        </div>
-        <div class="item">
-         <div class="products best-product">
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p26.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-          <div class="product">
-           <div class="product-micro">
-            <div class="row product-micro-row">
-             <div class="col col-xs-5">
-              <div class="product-image">
-               <div class="image"> <a href="#"> <img
-                  src="{{ asset('frontend/assets/images/products/p27.jpg') }}">
-                </a> </div>
-               <!-- /.image -->
-
-              </div>
-              <!-- /.product-image -->
-             </div>
-             <!-- /.col -->
-             <div class="col2 col-xs-7">
-              <div class="product-info">
-               <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-               <div class="rating rateit-small"></div>
-               <div class="product-price"> <span class="price"> $450.99
-                </span> </div>
-               <!-- /.product-price -->
-
-              </div>
-             </div>
-             <!-- /.col -->
-            </div>
-            <!-- /.product-micro-row -->
-           </div>
-           <!-- /.product-micro -->
-
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-      <!-- /.sidebar-widget-body -->
-     </div>
-     <!-- /.sidebar-widget -->
-     <!-- ============================================== BEST SELLER : END ============================================== -->
-
-
-
     </div>
     <!-- /.homebanner-holder -->
     <!-- ============================================== CONTENT : END ============================================== -->
    </div>
    <!-- /.row -->
-   <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-   @include('frontend.body.brands')
-   <!-- /.logo-slider -->
-   <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
   </div>
   <!-- /.container -->
  </div>

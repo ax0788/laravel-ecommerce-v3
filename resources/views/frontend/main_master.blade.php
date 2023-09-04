@@ -51,6 +51,7 @@
  <!-- /#top-banner-and-menu -->
 
  <!-- ============================================================= FOOTER ============================================================= -->
+ @include('frontend.body.footer')
  <!-- ============================================================= FOOTER : END============================================================= -->
 
  <!-- For demo purposes – can be removed on production -->
@@ -73,7 +74,7 @@
  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-{{-- Autocomplete --}}
+{{-- Searching & Autocomplete --}}
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
  <script>
     $(document).ready(function () {

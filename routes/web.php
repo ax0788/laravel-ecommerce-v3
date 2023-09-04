@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\BrandController;
@@ -26,7 +27,7 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::group(['middleware' => 'auth'], function () {
 
     /////////// Admin Route Group ///////////
-    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::group(['middleware' => 'role:admin', 'as' => 'admin.'], function () {
 
         //   View Dashbaord
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
@@ -128,6 +129,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::get('/users/view', [AdminProfileController::class, 'UsersIndex'])->name('users.index');
+
+
+
+
+        //Youtube Course Remake
+        Route::controller(GroupController::class)->group(function () {
+            Route::get('/group', 'index');
+            Route::get('/group-add', 'create');
+        });
+
+
     }); /*End Admin Route Group */
 
 
@@ -173,6 +185,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Canceled Orders
         Route::get('/orders/canceled', 'CancelOrders')->name('cancel.order');
     });
+
 }); /* End Auth Route Group */
 
 ////////////// Guest Routes ///////////////////
